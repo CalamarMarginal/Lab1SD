@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package grpc;
+
+message CompraPyme {
+
+    enum EsPrioritario {
+        NO = 0;
+        SI = 1;
+    }
+
+    string id = 1;
+    string nombre = 2;
+    double costo = 3;
+    string origen = 4;
+    string destino = 5;
+    EsPrioritario prioridad = 6;
+}
+
+message CompraRetail {
+
+    string id = 1;
+    string nombre = 2;
+    double costo = 3;
+    string origen = 4;
+    string destino = 5;
+}
+
+message ComprarEnPyme {
+    CompraPyme comprapyme = 1;
+}
+
+message ComprarEnPymeResp {
+    string id = 1;
+    string seguimiento = 2;
+}
+
+message ComprarEnRetail {
+    CompraRetail compraretail = 1;
+}
+
+message ComprarEnRetailResp {
+    string id = 1;
+}
+
+
+service ServicioClientes {
+    rpc CPyme(ComprarEnPyme) returns (ComprarEnPymeResp);
+    rpc CRetail(ComprarEnRetail) returns (ComprarEnRetailResp);
+}
